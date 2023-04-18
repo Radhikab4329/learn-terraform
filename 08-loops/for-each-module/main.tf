@@ -19,3 +19,9 @@ module "ec2" {
   instance_type = each.value.instance_type
   name = each.value.name
 }
+
+output "publicip" {
+  value = {
+    for k, v in module.ec2 : k => v["ec2"].public_ip
+  }
+}
